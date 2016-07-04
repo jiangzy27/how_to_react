@@ -13,7 +13,7 @@
     5.内置source map，即使打包在一起依旧方便调试
 
 ####安装方法
-    1.先预装npm。<br />
+    1.先预装npm。
     2.npm install webpack -g（全局安装）
     3.npm install webpack --save-dev(本地安装)
 这里强调一下，跟gulp类似，全局安装会装在c盘下指定的某个路径，会全局找到webpack这个命令。
