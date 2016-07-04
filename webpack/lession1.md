@@ -20,7 +20,8 @@ css-loader是读取css文件的模块，而style-loader就是转换模块的作�
     document.write('hello');
 ```
 不用晕，我来解释一下，我们从后往前看，这个./style.css，就是你刚才写的背景为绿色的css文件，这个没啥问题吧。
-而前面的感叹号！，就是一个分隔符，也是一个管道符，意思为：style-loader和css-loader分别处理之，处理顺序是从后到前，
+而前面的感叹号！，就是一个分隔符，也是一个管道符，意思为：style-loader和css-loader分别处理之，处理顺序是从后到前。
+当然我们也可以使用全名： require('!style-loader!css-loader!./style.css')
 我们前面说过，css-loader是读取文件，style-loader是打包文件，那么经过了这两道工序后，我们的工作也就ok了。
 最后，我们别忘了执行：<br />
 
