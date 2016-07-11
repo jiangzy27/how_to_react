@@ -30,13 +30,13 @@
  componentDidMount
 
  此时已经存在一个类 NodesList 和 两个对象 list1 & list2
- 然后我们执行 list1.setState({name: "ccc”})。那么输出如下：
+ 然后我们执行 list1.setState({val: "ccc”})。那么输出如下：
 
  componentWillUpdate
  render
  componentDidUpdate
 
- 可以发现页面上的 hello aaa 已经变成了 hello ccc,
+ 可以发现页面上的 hello 已经变成了 ccc,
  也就是说，我们在外部更新状态值，就是调用update更新，而不是创建。
  * */
 import React from 'react';
