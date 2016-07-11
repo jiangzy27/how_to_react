@@ -26,4 +26,16 @@ npm install babel-preset-react
 凡是babel打头的，都是babel名下的插件，也就是说，babel一家独揽了react的所有业务，是个很厉害的东东。
 我查了一下目前网上的一些教程，现在五花八门用啥的都有，比如jsx-loader这个加载器，大家看名字应该可以猜出来，
 他是webpack直属名下的工具插件，可以直接解析react的jsx语法，但这玩意已经落伍了，我们现在统一接入babel大管家管理一切，
-其他的都不用去管了。
+其他的都不用去管了。<br />
+以上是打包的工具已经全了,我们在书写react语法时，要在严格模式下进行，这个很重要，因为严格模式会检测出一些不规则的语法错误，
+这个对我们开发还是蛮有帮助的。一般，我们开头会这样写：
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+```
+import是引用包的意思，所以我们还需要安装一下react的相关包：
+
+```
+npm install react
+npm install react-dom
+```
