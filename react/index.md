@@ -39,3 +39,44 @@ import是引用包的意思，所以我们还需要安装一下react的相关包
 npm install react
 npm install react-dom
 ```
+PS：<br />
+如果你真的不想玩这个什么webpack，其实也有办法绕过去。<br />
+方法1：<br />
+
+```
+npm install -g react-tools
+```
+单独安装这个转换工具，然后执行：
+
+```
+jsx --watch src/ build/
+```
+这个可以自动监控你的修改，并生成目标文件，非常的方便，参考easy这个例子。<br />
+方法2：<br />
+类似less,单独下载一个js转换工具SXTransformer.js，然后这样写：
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<script src="build/react.js"></script>
+<script src="build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/jsx">
+React.render(
+<h1>Hello, world!</h1>,
+document.getElementById('example')
+);
+</script>
+</body>
+</html>
+```
+
+也可以将jsx写在外面，然后引入：
+
+```
+<script type="text/jsx" src="src/helloworld.js"></script>
+```
+如果在项目比较赶，急于上手的情况下，这两个方法可以应一下急。
