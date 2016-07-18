@@ -53,7 +53,7 @@ jsx --watch src/ build/
 ```
 这个可以自动监控你的修改，并生成目标文件，非常的方便，参考easy这个例子。<br />
 方法2：<br />
-类似less,单独下载一个js转换工具SXTransformer.js，然后这样写：
+类似less,单独下载一个js转换工具JSXTransformer.js，然后这样写：
 
 ```
 <!DOCTYPE html>
