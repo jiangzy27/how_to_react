@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+//一个参数的简单函数
+    var foo = a =>a;
+    console.log(foo('hello,world'));
+//没有参数的直接是空括号
+    var foo2 = () =>{
+    alert('haha');
+    }
+    foo2();
+//多个参数需要用到小括号，参数间逗号间隔，例如两个数字相加
+    var add = (a,b) => a+b;
+    console.log(add(1,2));
+//函数体多条语句需要用到大括号
+    var add2 = (a,b) =>{
+
+        if (typeof a == 'number' && typeof b == 'number') {
+            return a + b;
+        } else {
+            return 0;
+        }
+
+
+   };
+    console.log(add2('a','b'));
+//返回对象时需要用小括号包起来，因为大括号被占用解释为代码块了
+    var getHash = () =>{
+    return (
+    {
+        name:'zhangsan',
+        age:10
+
+    });
+
+};
+    console.log(getHash());
+//直接作为事件的handler
+    document.addEventListener('click',ev=>{console.log(ev);});
+    /**
+     * 注意点：
+     *
+     * 1. this固定，不再善变，这个很有用，再不用写me，self，_this了，或者bind。
+     * 2. 箭头函数不能用new
+     *
+     *
+     *
+     * */
+</script>
