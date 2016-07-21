@@ -34,4 +34,5 @@ babel  src/ -d dest/
 然后再注意一个问题，Babel所做的只是帮你把**ES6 模块化语法**转化为**CommonJS 模块化语法**，
 比如我们的export里面的例子，实际上import这个关键字，会转换为require关键字，而实际上es5原生语法并没有require，
 其中的require exports 等是 CommonJS 在具体实现中所提供的变量，
-如果我们要在html里面直接使用是不行的。好啦，废话不多说，我们去玩es6喽~~~
+如果我们要在html里面直接使用是不行的,可以借助打包工具打包后使用，比如webpack或Browserify，
+其中，Browserify是专门解决这种CommonJS问题的，而webpack除此之外还有更强大的作用。好啦，废话不多说，我们去玩es6喽~~~
