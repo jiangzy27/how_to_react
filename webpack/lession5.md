@@ -1,8 +1,8 @@
 ###css文件隔离打包
 因为webpack可以将任何文件打包，然后通过import或require方式引入，
-这样在写的时候固然很爽，但是正式上线就有了麻烦，因为每个组件也许都会
-引入一个公用的css样式文件，跟前一节课的公用js库情况类似，这种公用的css样式表
-文件一般个头也不会小，同样会导致组件臃肿问题。比如这样一段代码：
+这样在写的时候固然很爽，但是正式上线就有了麻烦，因为每个组件也许都会引入css样式，
+样式文件最好可以单独打包，而不是跟js打在一起，因为css跟公用库一样，可以反复利用的，
+我写了一个按钮样式，同事小王和小张都可以在组件内直接引入使用，而写完都打包到各自的bundle.js里面发布，就会导致组件臃肿问题。比如：
 
 ```
 //声明一个组件button。
@@ -22,7 +22,7 @@ class Button extends Component{
 }
 export default Button;//导出组件
 ```
-这个示例是一个按钮组件，这个按钮自身肯定需要css样式表给修饰打扮一下的，我们在webpack打包时这样处理：
+我们可以把所有的css文件都组合在一起，打成一个总文件引入：
 
 ```
 //**********************************************//
@@ -38,7 +38,8 @@ module.exports = {
     },
     module:{
         loaders:[
-            //处理css
+            //处理css，正则匹配到css文件后，css-loader的功能就是可以模块化css，然后import引用
+            //ExtractTextPlugin.extract的意思是，可以模块化处理，但不直接打包。
             {test:/\.css$/,loader:ExtractTextPlugin.extract("style-loader","css-loader")},
             {test:/\.less$/,loader:ExtractTextPlugin.extract("style-loader","css-loader!less-loader")},
             //处理jsx等。
@@ -47,7 +48,8 @@ module.exports = {
 
     },
     plugins: [
-        new ExtractTextPlugin("./dest/style.less",{
+    //总打包为一个文件，而不是打散成N个小文件。
+        new ExtractTextPlugin("./dest/style.css",{
             allChunks: true
         })
     ]
@@ -59,7 +61,7 @@ entry文件是：
 ```
 require('./button.js');
 ```
-然后我们在html单独引用这个less文件即可。
+然后我们在html引入总文件：
 
 ```
 <!DOCTYPE html>
@@ -76,18 +78,14 @@ require('./button.js');
 <script src="./dest/bundle.js"></script>
 ```
 
-当然也可以每个组件都拆分一个css单独使用，这种情况使用的场景是：<br />
-我写了一个按钮样式文件，然后打包，
-按钮的css文件是我自己写的，然后同事小王看我这个按钮做的挺漂亮的，
-就想拿来用，但仅限于css样式，按钮的功能肯定是不一样的。
-这种情况就需要分开打包为button.js,button.css：
+当然也可以拆成各自的小css单独引入，这样更加灵活：
 
 ```
  plugins: [
         new ExtractTextPlugin("[name].css")
     ]
 ```
-[name]就是entry里面指定的键，也就是打包后的文件名。
+[name]就是entry里面指定的键，也就是打包后的css文件名。
 <br />
 参考：https://webpack.github.io/docs/stylesheets.html
 
