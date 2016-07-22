@@ -1,3 +1,4 @@
+//分开打包，将react等文件，都打入common.js里面，单独引入，这样就避免了每个组件过大的问题。
 var webpack = require('webpack');
 module.exports = {
     entry:{
