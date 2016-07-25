@@ -26,7 +26,8 @@ var TodoStore = Reflux.createStore({
 //创造一个view
 var TodoComponent = React.createClass({
 
-    //监听store
+    //监听store,
+    //onStatusChange这个函数名可以随便起。
     mixins:[Reflux.listenTo(TodoStore,'onStatusChange')],
     getInitialState:function(){
         return {list:[]};
