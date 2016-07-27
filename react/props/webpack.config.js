@@ -1,4 +1,4 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+//var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry:'./entry.js',//指定打包入口文件，每有一个键值对，就是一个入口文件。
     output:{
@@ -11,9 +11,6 @@ module.exports = {
             {test:/\.js?$/,loader:'babel-loader',exclude:/node_modules/,query:{compact:false,presets:['es2015','react']}}
         ]
 
-    },
-    plugins: [
-        new ExtractTextPlugin("./dest/bundle.css")
-    ]
+    }
 
 };
