@@ -44,5 +44,18 @@ Flex就是flexible box的缩写，意为“弹性布局”，用来为盒装模�
 *   align-items
 *   align-content
 
+####flex-direction属性
+flex-direction属性决定主轴的方向（即项目的排列方向）。
 
+```
+.box{
+    flex-direction:row | row-reverse | column | column-reverse;
+}
+```
 
+<img src="./flex-direction.png" /><br />
+它可能有4个值：
+*   row(默认值)：主轴为水平方向，起点在最左端。
+*   row-reverse：主轴为水平方向，起点在最右端。
+*   column：主轴为垂直方向，起点在上面。
+*   column：主轴为垂直方向，起点在下面。
