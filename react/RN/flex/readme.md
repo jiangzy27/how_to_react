@@ -24,6 +24,13 @@ Flex就是flexible box的缩写，意为“弹性布局”，用来为盒装模�
 ```
 
 4.注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+5.目前react native支持的属性有如下6个：
+*   flex
+*   flexDirection
+*   alignSelf
+*   alignItems
+*   justifyContent
+*   flexWrap
 
 ###基本概念
 采用flex布局的元素，称为flex容器（flex container），简称容器。它的所有子元素自动成为容器成员，
@@ -125,3 +132,26 @@ flex-flow是flex-direction和flex-wrap属性的简写,默认值是：row nowrap�
 *   center：与交叉轴的中点对齐。
 *   space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
 *   space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+
+###项目的属性
+暂时只掌握以下三个即可。<br/>
+*   flex-grow
+*   flex
+*   align-self
+
+####flex-grow属性
+定义项目的放大比例。默认是0.
+####flex属性
+这个属性其实是flex-grow（放大）、flex-shrink（缩小）、flex-basis的简写。
+默认值是0 1 auto，快捷键写法是auto（1 1 auto）和 none（0 0 auto）
+####align-self属性
+align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。
+默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+该属性可能取6个值，除了auto，其他都与align-items属性完全一致。
+
+```
+.item {
+  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+```
+<img src="./img/align_self.png" />
