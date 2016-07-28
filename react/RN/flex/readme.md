@@ -59,3 +59,19 @@ flex-direction属性决定主轴的方向（即项目的排列方向）。
 *   row-reverse：主轴为水平方向，起点在最右端。
 *   column：主轴为垂直方向，起点在上面。
 *   column：主轴为垂直方向，起点在下面。
+
+####flex-wrap属性
+默认情况下，项目都排在一条线（又称“轴线”）上。
+
+```
+.box{
+  flex-wrap: nowrap | wrap | wrap-reverse;
+}
+```
+它可能有三个值：
+*   nowrap（默认）：不换行。<br />
+<img src="nowrap.png" /><br />
+*   wrap：换行，第一行在上方。<br />
+<img src="wrap.jpg" /><br />
+*   wrap-reverse：换行，第一行在下方。<br />
+<img src="wrap_reverse.jpg" /><br />
