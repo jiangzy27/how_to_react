@@ -134,7 +134,7 @@ flex-flow是flex-direction和flex-wrap属性的简写,默认值是：row nowrap�
 *   space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
 
 ###项目的属性
-暂时只掌握以下三个即可。<br/>
+暂时只掌握以下2个即可。<br/>
 *   flex
 *   align-self
 
