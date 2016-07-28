@@ -75,3 +75,37 @@ flex-direction属性决定主轴的方向（即项目的排列方向）。
 <img src="./img/wrap.jpg" /><br />
 *   wrap-reverse：换行，第一行在下方。<br />
 <img src="./img/wrap_reverse.jpg" /><br />
+
+####flex-flow属性：
+flex-flow是flex-direction和flex-wrap属性的简写,默认值是：row nowrap。
+
+```
+.box {
+  flex-flow: <flex-direction> || <flex-wrap>;
+}
+```
+####justify-content属性
+定义了项目在**主轴**上的对齐方式。
+
+```
+.box {
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+```
+<img src="./img/justify_content.png" /><br />
+它可能取5个值，具体对齐方式跟轴方向有关。下面假设主轴是从左到右。<br />
+*   flex-start（默认值）：左对齐
+*   flex-end：右对齐
+*   center：居中
+*   space-between：两端对齐，项目之间的间隔都相等。
+*   space-around：每个项目**两侧**的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+
+####align-items属性
+定义了项目在**交叉轴**上如何对齐。
+
+```
+.box {
+  align-items: flex-start | flex-end | center | baseline | stretch;
+}
+```
+<img src="./img/align_items.png" /> <br />
