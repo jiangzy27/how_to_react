@@ -143,7 +143,7 @@ flex-flow是flex-direction和flex-wrap属性的简写,默认值是：row nowrap�
 定义项目的放大比例。默认是0.
 ####flex属性
 这个属性其实是flex-grow（放大）、flex-shrink（缩小）、flex-basis的简写。
-默认值是0 1 auto，快捷键写法是auto（1 1 auto）和 none（0 0 auto）
+react native暂时只支持flex：flex-grow这种写法，其他两种不需掌握。
 ####align-self属性
 align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。
 默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
