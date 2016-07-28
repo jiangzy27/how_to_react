@@ -23,7 +23,7 @@ Flex就是flexible box的缩写，意为“弹性布局”，用来为盒装模�
 }
 ```
 
-4.注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+4.注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。<br />
 5.目前react native支持的属性有如下6个：
 *   flex
 *   flexDirection
