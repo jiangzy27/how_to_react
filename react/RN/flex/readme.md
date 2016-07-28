@@ -42,7 +42,7 @@ Flex就是flexible box的缩写，意为“弹性布局”，用来为盒装模�
 项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。
 
 ###容器的属性
-以下6个属性设置在容器上。
+以下属性设置在容器上。
 
 *   flex-direction
 *   flex-wrap
