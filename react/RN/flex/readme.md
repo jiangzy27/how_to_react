@@ -109,3 +109,19 @@ flex-flow是flex-direction和flex-wrap属性的简写,默认值是：row nowrap�
 }
 ```
 <img src="./img/align_items.png" /> <br />
+####align-content属性
+定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用，也就是必须有换行的元素。
+
+```
+.box {
+  align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+```
+<img src="./img/align_content.png" /><br />
+属性可能有6个值。<br />
+*   stretch（默认值）：轴线占满整个交叉轴。
+*   flex-start：与交叉轴的起点对齐。
+*   flex-end：与交叉轴的终点对齐。
+*   center：与交叉轴的中点对齐。
+*   space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+*   space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
