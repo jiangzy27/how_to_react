@@ -55,4 +55,5 @@ AppRegistry.registerComponent('AwesomeProject',()=>IndexComponent);
 <TextInput placeholder="searching..." />
 ```
 ###ToastAndroid 安卓提示信息
+
 ToastAndroid.show('this is a toast',ToastAndroid.LONG);
