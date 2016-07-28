@@ -28,7 +28,7 @@ Flex就是flexible box的缩写，意为“弹性布局”，用来为盒装模�
 ###基本概念
 采用flex布局的元素，称为flex容器（flex container），简称容器。它的所有子元素自动成为容器成员，
 称为flex项目（flex item）,简称“项目”。<br />
-<img src="./bg.png" /> <br />
+<img src="./img/bg.png" /> <br />
 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。
 主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；
 交叉轴的开始位置叫做cross start，结束位置叫做cross end。
@@ -53,7 +53,7 @@ flex-direction属性决定主轴的方向（即项目的排列方向）。
 }
 ```
 
-<img src="./flex-direction.png" /><br />
+<img src="./img/flex-direction.png" /><br />
 它可能有4个值：
 *   row(默认值)：主轴为水平方向，起点在最左端。
 *   row-reverse：主轴为水平方向，起点在最右端。
@@ -70,8 +70,8 @@ flex-direction属性决定主轴的方向（即项目的排列方向）。
 ```
 它可能有三个值：
 *   nowrap（默认）：不换行。<br />
-<img src="nowrap.png" /><br />
+<img src="./img/nowrap.png" /><br />
 *   wrap：换行，第一行在上方。<br />
-<img src="wrap.jpg" /><br />
+<img src="./img/wrap.jpg" /><br />
 *   wrap-reverse：换行，第一行在下方。<br />
-<img src="wrap_reverse.jpg" /><br />
+<img src="./img/wrap_reverse.jpg" /><br />
