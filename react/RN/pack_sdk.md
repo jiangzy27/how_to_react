@@ -13,6 +13,7 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 *   my-release-key.keystore是秘钥名称，这个可以随便起。
 *   my-key-alias是别名，也可以随便起。
 *   其他的参数不用动。
+
 文件生成后，需要把这个文件拷贝到项目文件的android/app目录下。<br />
 
 2.  配置文件
