@@ -52,6 +52,7 @@ cd android && ./gradlew installRelease
 ```
 好啦，打包过程至此完成！<br />
 PS:<br />
+
 整个打包过程，可以在不启动模拟器的基础上，将apk打包到模拟器！
 再就是官方教程是把MYAPP_RELEASE_STORE_FILE这样一些全局信息，
 配置到~/.gradle/gradle/properties文件中，这个相当于全局配置文件，
