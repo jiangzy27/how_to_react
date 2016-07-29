@@ -21,10 +21,12 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 我们编辑android/app/build.gradle文件。
 
 ```
+<font color="red">
 def MYAPP_RELEASE_STORE_FILE="my-release-key.keystore"
 def MYAPP_RELEASE_KEY_ALIAS="my-key-alias"
 def MYAPP_RELEASE_STORE_PASSWORD="haha123456"
 def MYAPP_RELEASE_KEY_PASSWORD="haha123456"
+</font>
 .....
 android {
     ...
