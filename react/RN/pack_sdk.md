@@ -1,7 +1,8 @@
 ###打包sdk
 我们暂时以模拟器打包为例，真机也类似。
 
-+  生成签名
+1.  生成签名
+
 这是一个秘钥文件，我们用以下规则生成：
 
 ```
@@ -14,7 +15,8 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 *   其他的参数不用动。
 文件生成后，需要把这个文件拷贝到项目文件的android/app目录下。<br />
 
-+  配置文件
+2.  配置文件
+
 我们编辑android/app/build.gradle文件。
 
 ```
@@ -45,7 +47,8 @@ aandroid {
 ```
 编辑完成后保存。
 
-+  开始打包
+3.  开始打包
+
 
 ```
 cd android && ./gradlew installRelease
