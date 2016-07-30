@@ -54,7 +54,17 @@ android {
 ```
 cd android && ./gradlew installRelease
 ```
+
+>获取apk包
+
+我们打包完成后，在：
+android/app/build/outputs/apk
+这个目录下面，会找到我们打包完成的apk包，将这个包复制到真机，即可安装运行。
+
+
 好啦，打包过程至此完成！<br />
+
+
 PS:<br />
 
 整个打包过程，可以在不启动模拟器的基础上，将apk打包到模拟器！
