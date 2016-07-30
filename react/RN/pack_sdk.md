@@ -54,6 +54,7 @@ android {
 ```
 cd android && ./gradlew installRelease
 ```
+运行这个命令，会默认在虚拟机安装，并生成apk文件。
 
 >获取apk包
 
