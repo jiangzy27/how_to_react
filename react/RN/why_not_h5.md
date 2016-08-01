@@ -39,7 +39,8 @@ web的性能瓶颈，主要有以下原因。
 
 >dom的异步操作。
 
-js对dom操作不再是同步的，加入event loop机制进行监听。
+js对dom操作不再是同步的，加入event loop机制进行监听。介个，你也要等。。。。
 
 >虚拟dom。
+
 react的virtual dom方案是目前最靠谱的，所以，我们要学习react！
