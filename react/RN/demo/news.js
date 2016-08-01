@@ -1,10 +1,7 @@
+import React, { Component } from 'react';
 import {
-    AppRegistry,
-    Component,
-    StyleSheet,
-    PixelRatio,
     Text,
-    View,
+    View
     }  from 'react-native';
 import {styles} from './styles';
 

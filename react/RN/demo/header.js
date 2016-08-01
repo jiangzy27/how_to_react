@@ -13,13 +13,10 @@ react的width没有单位，实际上单位默认的是pt。
  });
  <Image source={image} style={{width: 200, height: 100}} />
 * */
+ import React, { Component } from 'react';
 import {
-    AppRegistry,
-    Component,
-    StyleSheet,
-    PixelRatio,
     Text,
-    View,
+    View
     }  from 'react-native';
 import {styles} from './styles';
 

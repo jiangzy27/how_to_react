@@ -1,3 +1,9 @@
+
+import {
+    StyleSheet,
+    PixelRatio,
+    }  from 'react-native';
+
 var styles = StyleSheet.create({
     flex:{
         flex:1
@@ -7,7 +13,7 @@ var styles = StyleSheet.create({
         height:50,
         borderBottomWidth:3/PixelRatio.get(),
         borderBottomColor:'red',
-        alignItem:'center'//上下居中
+        alignItems:'center'//上下居中
 
     },
     font: {
@@ -41,4 +47,4 @@ var styles = StyleSheet.create({
         marginTop:15
     }
 });
-module.exports = styles;
+module.exports = {styles:styles};//注意这里

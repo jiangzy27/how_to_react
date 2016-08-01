@@ -3,19 +3,17 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-
-var React = require('react-native');
-var {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-} = React;
+import React, { Component } from 'react';
+import {
+    AppRegistry,
+    View
+    }  from 'react-native';
+import {styles} from './styles';
 import Header from './header';
 import List from './list';
-import News from './news'
-var app = React.createClass({
-  render: function() {
+import News from './news';
+class app extends Component {
+  render() {
     return (
         <View style={styles.flex}>
             <Header></Header>
@@ -32,7 +30,6 @@ var app = React.createClass({
         </View>
     );
   }
-});
+};
 
-
-AppRegistry.registerComponent('AwesomeProject', () => app);
+AppRegistry.registerComponent('app', () => app);
