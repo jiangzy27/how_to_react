@@ -3,11 +3,13 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    Navigator
+    Navigator,
+    BackAndroid,
+    Text
     }  from 'react-native';
-import IndexView from './index';
-import ListView from './list';
-import DetailView from './detail';
+import IndexView from './nav/index';
+import ListView from './nav/list';
+import DetailView from './nav/detail';
 /*
  getCurrentRoutes() - 获取当前栈里的路由，也就是push进来，没有pop掉的那些。
  jumpBack() - 跳回之前的路由，当然前提是保留现在的，还可以再跳回来，会给你保留原样。
@@ -24,22 +26,17 @@ import DetailView from './detail';
 *
 * */
 class app extends Component {
-  render() {
-    return (
-        <Navigator
-            initialRoute={{name:'index'}}
-            configureScene={this.configureScene}
-            renderScene={this.renderScene}
-        />
-    );
-  }
-//配置转场动画
-    configureScene(route){
+
+    //配置转场动画
+    _configureScene(route){
         return  Navigator.SceneConfigs.FadeAndroid;
     }
 //渲染路由
-    renderScene(router,navigator){
-        var Component = null;this._navigator = navigator;
+    _renderScene(router,navigator){
+        var Component = null;
+        //alert(navigator);
+        this.nav = navigator;
+
         switch(router.name){
             case 'index':
                 Component = IndexView;
@@ -49,14 +46,26 @@ class app extends Component {
                 break;
             case 'detail':
                 Component = DetailView;
+                break;
         }
         //无论跳到那个组件，参数都作为props传递。
         //navigator是个全局变量
         return <Component {...router.params}  navigator={navigator} />
 
     }
+
+  render() {
+    //一定注意这里面的bind(this),不写就报错!!
+    return (
+        <Navigator
+            initialRoute={{name:'index'}}
+            configureScene={this._configureScene.bind(this)}
+            renderScene={this._renderScene.bind(this)} />
+        
+    );
+  }
     componentDidMount(){
-        var navigator = this._navigator;
+        var navigator = this.nav;
         BackAndroid.addEventListener('hardwareBackPress',function(){
             if (navigator && navigator.getCurrentRoutes().length > 1) {
                 navigator.pop();

@@ -13,7 +13,7 @@ class ListView extends Component {
     render(){
         return (
             <View>
-                <Text onPress = {this.gotoDetail}>
+                <Text onPress = {this.gotoDetail.bind(this)}>
                     this is the list view.
                 </Text>
             </View>

@@ -12,7 +12,7 @@ class IndexView extends Component {
     render(){
         return (
             <View>
-                <Text onPress={this.gotoList}>
+                <Text onPress={this.gotoList.bind(this)}>
                     this is  the index view.
 
                 </Text>
