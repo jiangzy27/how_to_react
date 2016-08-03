@@ -94,7 +94,7 @@ class app extends Component {
         }
         return (
             <ListView
-                dataSource = {this.state.dataSource.bind(this)}
+                dataSource = {this.state.dataSource}
                 renderRow = {this.renderMovie.bind(this)}
                 style={styles.listView}
             />
