@@ -4,12 +4,13 @@ import {
     AppRegistry,
     Navigator,
     BackAndroid,
-    Text
+    Text,
+    Dimensions
     }  from 'react-native';
-import RefreshInfiniteListView from '@remobile/react-native-refresh-infinite-listview';
+import RefreshInfiniteListView from 'react-native-refresh-infinite-listview';
 /*下拉刷新上提加载组件
 * 安装：
-* npm install @remobile/react-native-refresh-infinite-listview --save
+* npm install react-native-refresh-infinite-listview --save
 *
 * */
 //样式表
@@ -29,88 +30,73 @@ var styles = StyleSheet.create({
         backgroundColor: '#CCC'
     }
 });
-
+var url  =  'http://localhost:9998/query';
+var data = [];
 class app extends Component {
     constructor(props){
         super(props);
-        this.data = {index: 0, maxIndex:20, list:[]};
+        this.page = 1;
         this.state = {
             dataSource:new ListView.DataSource({
                 rowHasChanged:(row1,row2) => row1 != row2
             })
 
-        };
 
-        this.getData(true);
+        };
+        getData();
+
     }
-    getData(init) {
-        var total = 5;
-        if (init) {
-            this.data.index = 0;
-            this.data.list = [];
-            total = Math.floor(Math.random()*5);
-        }
-        for (var i=0; i<total; i++) {
-            this.data.list[this.data.index] = "Row" + (this.data.index+1);
-            this.data.index++;
-        }
+    //请求数据
+    getData(){
+        url = url+"?page="+this.page;
+        fetch(url)
+            .then((response)=>response.json())
+            .then((resData)=>{
+                data.push(resData);
+                this.setState({
+                    //类实例下面的方法调用，将ajax返回的数据填充到列表
+                    dataSource:this.state.dataSource.cloneWithRows(data)
+
+                });
+            })
+            .done();
+
     }
     onRefresh() {
-        this.getData(true);
+        this.page = 1;
+        this.getData();
 
-        this.timer = setTimeout(()=>{
-            this.list.hideHeader();
-            this.setState({dataSource: ds.cloneWithRows(this.data.list)});
-        }, 1000);
     }
     onInfinite() {
+        this.page = this.page+1;
         this.getData();
-        this.timer_two = setTimeout(()=>{
-            this.list.hideFooter();
-            this.setState({dataSource: ds.cloneWithRows(this.data.list)});
-        }, 1000);
+
     }
-    loadedAllData() {
-        return this.data.index >= this.data.maxIndex||this.data.index===0;
-    }
-    renderRow(text) {
+
+    renderRow(rowData, sectionID, rowID) {
         return (
             <View style={styles.row}>
                 <Text >
-                    {text}
+                    {"rowData:"+rowData+"===rowId:"+rowID}
                 </Text>
             </View>
         )
     }
-    renderSeparator(sectionID, rowID) {
-        return (
-            <View style={styles.separator} key={sectionID+rowID}/>
-        );
-    }
+
     render() {
         return (
-            <View style={{flex:1}}>
-                <View style={{height:20}} />
+
                 <RefreshInfiniteListView
-                    ref = {(list) => {this.list= list}}
                     dataSource={this.state.dataSource}
                     renderRow={this.renderRow.bind(this)}
-                    renderSeparator={this.renderSeparator.bind(this)}
-                    loadedAllData={this.loadedAllData.bind(this)}
-                    initialListSize={30}
-                    scrollEventThrottle={10}
-                    style={{backgroundColor:'transparent'/*,top:100, left:10, width:200, height:300, position:'absolute'*/}}
+
                     onRefresh = {this.onRefresh.bind(this)}
                     onInfinite = {this.onInfinite.bind(this)}
-                >
-                </RefreshInfiniteListView>
-            </View>
+                />
+
+
         )
     }
-    //销毁定时器
-    componentWillUnmount() {
-        this.timer && clearTimeout(this.timer);
-        this.timer_two && clearTimeout(this.timer_two);
-    }
+
 }
 AppRegistry.registerComponent('app', () => app);
