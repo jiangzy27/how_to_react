@@ -12,7 +12,7 @@ class app extends Component {
     render(){
     	return (
         <View style={{flex:1}}>
-            <Text style={{hieght:40}}>网页展示</Text>
+            <Text style={{fontSize:30,height:70,textAlign:'center',marginTop:30}}>展示首页</Text>
             <WebView
                 style={{backgroundColor:'red'}}
                 url={url}
