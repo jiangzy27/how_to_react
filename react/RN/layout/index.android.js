@@ -9,9 +9,15 @@ import {
     } from 'react-native';
 
 
-import Layout from 'layout';
-class app extends Component {
+import Layout from './layout';
 
+class app extends Component {
+	render(){
+		return (
+				<Layout />
+			);
+
+	}
 
 }
 
