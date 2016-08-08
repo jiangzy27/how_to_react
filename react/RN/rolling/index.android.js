@@ -42,7 +42,7 @@ var styles = StyleSheet.create({
 class app extends Component{
   render(){
     return (
-        <Swiper style={styles.wrapper} showButtons={true}>
+        <Swiper style={styles.wrapper} showsButtons={true}>
           <View style={styles.slide1}>
               <Text>slide1</Text>
 
