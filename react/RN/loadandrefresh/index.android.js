@@ -1,102 +1,139 @@
-'use strict';
 import React, { Component } from 'react';
 import {
-    AppRegistry,
-    Navigator,
-    BackAndroid,
-    Text,
-    Dimensions
-    }  from 'react-native';
-import RefreshInfiniteListView from 'react-native-refresh-infinite-listview';
-/*下拉刷新上提加载组件
-* 安装：
-* npm install react-native-refresh-infinite-listview --save
-*
-* */
-//样式表
-var styles = StyleSheet.create({
-    row: {
-        height:60,
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    list: {
-        alignSelf:'stretch'
-    },
-    separator: {
-        height: 1,
-        backgroundColor: '#CCC'
-    }
-});
-var url  =  'http://localhost:9998/query';
-var data = [];
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  ListView,
+} from 'react-native';
+
+import {PullList} from 'react-native-pull';
+var count = 0;
 class app extends Component {
-    constructor(props){
+
+    constructor(props) {
         super(props);
-        this.page = 1;
+        this.dataSource = [{
+            id: 0,
+            title: '第一屏数据',
+        }];
         this.state = {
-            dataSource:new ListView.DataSource({
-                rowHasChanged:(row1,row2) => row1 != row2
-            })
-
-
+            list: (new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})).cloneWithRows(this.dataSource),
         };
-        getData();
-
-    }
-    //请求数据
-    getData(){
-        url = url+"?page="+this.page;
-        fetch(url)
-            .then((response)=>response.json())
-            .then((resData)=>{
-                data.push(resData);
-                this.setState({
-                    //类实例下面的方法调用，将ajax返回的数据填充到列表
-                    dataSource:this.state.dataSource.cloneWithRows(data)
-
-                });
-            })
-            .done();
-
-    }
-    onRefresh() {
-        this.page = 1;
-        this.getData();
-
-    }
-    onInfinite() {
-        this.page = this.page+1;
-        this.getData();
-
+        this.renderHeader = this.renderHeader.bind(this);
+        this.renderRow = this.renderRow.bind(this);
+        this.renderFooter = this.renderFooter.bind(this);
+        this.loadMore = this.loadMore.bind(this);
+        // this.loadMore();
     }
 
-    renderRow(rowData, sectionID, rowID) {
-        return (
-            <View style={styles.row}>
-                <Text >
-                    {"rowData:"+rowData+"===rowId:"+rowID}
-                </Text>
-            </View>
-        )
+    onPullRelease(resolve) {
+        //do something
+        setTimeout(() => {
+            resolve();
+        }, 3000);
+    }
+
+    topIndicatorRender(pulling, pullok, pullrelease) {
+        return <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 60}}>
+          <ActivityIndicator size="small" color="gray" />
+          {pulling ? <Text>正在刷新...</Text> : null}
+          {pullok ? <Text>正在刷新....</Text> : null}
+          {pullrelease ? <Text>正在完成...</Text> : null}
+        </View>;
     }
 
     render() {
         return (
+          <View style={styles.container}>
+              <PullList
+                  style={{}}
+                  onPullRelease={this.onPullRelease} topIndicatorRender={this.topIndicatorRender} topIndicatorHeight={60}
+                  renderHeader={this.renderHeader}
+                  dataSource={this.state.list}
+                  pageSize={10}
+                  initialListSize={10}
+                  renderRow={this.renderRow}
+                  onEndReached={this.loadMore}
+                  onEndReachedThreshold={60}
+                  renderFooter={this.renderFooter}
+                  />
+          </View>
+        );
+    }
 
-                <RefreshInfiniteListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow.bind(this)}
+    renderHeader() {
+      return (
+          <View style={{height: 80, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontWeight: 'bold',fontSize:30}}>列表页</Text>
+          </View>
+      );
+    }
 
-                    onRefresh = {this.onRefresh.bind(this)}
-                    onInfinite = {this.onInfinite.bind(this)}
-                />
+    renderRow(item, sectionID, rowID, highlightRow) {
+      return (
+          <View style={{height: 200, backgroundColor: 'yellow', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize:30}}>{item.title}</Text>
+          </View>
+      );
+    }
 
+    renderFooter() {
+      //  alert('foot');
+      if(this.state.nomore) {
+          return (
+                <View style={{flex:1,flexDirection:'column',backgroundColor:'white'}}>
+                    <View style={{height:50,alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{fontSize:30}}>没有更多了</Text>
+                    </View>
+                </View>    
+            );
+      }
+      return (
+          <View style={{height: 100}}>
+              <ActivityIndicator />
+          </View>
+      );
+    }
 
-        )
+    loadMore() {
+        count++;
+       // alert('loading');
+        // this.dataSource.push({
+        //     id: 0,
+        //     title: `begin to create data ...`,
+        // });
+        if(count > 3){
+            this.state.nomore = true;
+            
+        }else{
+        for(var i = 0; i < 10; i++) {
+            this.dataSource.push({
+                id: i + 1,
+                title: `this is ${i*count}`,
+            })
+        }
+        // this.dataSource.push({
+        //     id: 6,
+        //     title: `finish create data ...`,
+        // });
+        setTimeout(() => {
+            this.setState({
+                list: this.state.list.cloneWithRows(this.dataSource)
+            });
+        }, 1000);
+
+        }
     }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#ccc',
+  },
+});
 AppRegistry.registerComponent('app', () => app);

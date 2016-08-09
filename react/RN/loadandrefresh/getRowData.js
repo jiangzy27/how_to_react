@@ -5,14 +5,14 @@ var app = express();
 app.use(express.static('./'));
 app.get('/query',function(req,res){
     var page = req.query.page;
-    var endNum = page*10;
-    var beginNum =  (page-1)*10;
+    var endNum = page*15;
+    var beginNum =  (page-1)*15;
     var arr = [];
     for(var i=beginNum+1;i<=endNum;i++){
-        arr.push('row====='+i);
+        arr.push({id:i,name:'row====='+i});
     }
 
-    res.send(arr);
+    res.send(JSON.stringify(arr));
 });
 
 
