@@ -5,14 +5,19 @@ var app = express();
 app.use(express.static('./'));
 app.get('/query',function(req,res){
     var page = req.query.page;
-    var endNum = page*15;
-    var beginNum =  (page-1)*15;
+    var endNum = page*10;
+    var beginNum =  (page-1)*10;
     var arr = [];
-    for(var i=beginNum+1;i<=endNum;i++){
-        arr.push({id:i,name:'row====='+i});
+    if(page>3){
+        res.send("");
+    }else{
+        for(var i=beginNum+1;i<=endNum;i++){
+            arr.push({id:i,img:'https://raw.githubusercontent.com/vczero/vczero.github.io/master/ctrip/feiji.png',title:'第'+i+'条测试数据',desc:'测试列表页，列表页具有下拉刷新、上拉加载的功能'});
+        }
+
+        res.send(JSON.stringify(arr));
     }
 
-    res.send(JSON.stringify(arr));
 });
 
 
