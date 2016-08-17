@@ -15,14 +15,17 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor:'rgba(0,0,0,0.5)'
+
+
   },
   innerContainer: {
     borderRadius: 10,
     alignItems: 'center',
-    backgroundColor:'lightblue',
     height:200,
     padding:20,
-    marginTop:50
+    marginTop:50,
+    backgroundColor:'white'
   }
 
 });
@@ -36,22 +39,22 @@ class app extends Component{
     }
     setModalVisible(visible){
         this.setState({modalVisible:visible});
-    }
-
+     }
+    
 
     render(){
         return (
             <View style={{marginTop:22,backgroundColor:'green'}}>
                 <Modal 
                     animationType={"slide"}
-                    transparent={false}
+                    transparent={true}
                     visible={this.state.modalVisible}
                     onRequestClose={()=>{this.setModalVisible(false)}}
                 >
-                    <View style={styles.container}>
+                    <View style={[styles.container]}>
                         <View style={[styles.innerContainer]}>
 
-                            <Text>对话框的内容信息</Text>
+                            <Text style={{fontSize:20}}>对话框的内容信息</Text>
                             <TouchableHighlight 
                                 onPress={()=>{
                                     this.setModalVisible(!this.state.modalVisible);
@@ -70,7 +73,7 @@ class app extends Component{
 
                 <TouchableHighlight  onPress={()=>{
                     this.setModalVisible(true);
-
+                    
                 }}>
                     <Text>显示</Text>
                 </TouchableHighlight>
