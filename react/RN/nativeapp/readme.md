@@ -20,10 +20,13 @@ public class HelloKitty extends ReactContextBaseJavaModule {//基础类继承
     return "hellokitty";
   }
   //按实际需要定义某些方法
- public String getMessage(String message) {
-   Toast.makeText(getReactApplicationContext(), message, duration).show();
-
- }
+  @Override
+  public Map<String, Object> getConstants() {
+    final Map<String, Object> constants = new HashMap<>();
+    constants.put(DURATION_SHORT_KEY, Toast.LENGTH_SHORT);
+    constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
+    return constants;
+  }
 
 
 }
@@ -86,7 +89,7 @@ public class MainActivity extends ReactActivity {
 ```
 var hello = require('react-native-hellokitty');
 
-console.log(hello.getMessage("你快乐吗？"));//使用java功能类的方法
+console.log(hello.getConstants());//使用java功能类的方法
 
 
 ```
