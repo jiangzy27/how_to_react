@@ -31,8 +31,8 @@ public class HelloKitty extends ReactContextBaseJavaModule {//基础类继承
 
 }
 ```
-继承的这个ReactContextBaseJavaModule类也不是唯一的，比如重写webview这个组件时，就需要继承SimpleViewManager这个类，
-这个根据实际情况选择。
+封装原生模块的话，继承ReactContextBaseJavaModule类，比如Toast，log这样的；
+如果封装UI组件，就要继承SimpleViewManager这个泛型类，如ScrollView，TextInput等。
 
 >第二步：注册package类
 
