@@ -51,7 +51,7 @@ public class AppReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
 
-        return Collections.emptyList();;
+        return Collections.emptyList();
     }
 
     @Override
