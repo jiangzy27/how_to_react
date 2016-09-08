@@ -19,14 +19,11 @@ public class HelloKitty extends ReactContextBaseJavaModule {//基础类继承
   public String getName() {
     return "hellokitty";
   }
-  //按实际需要定义某些方法
-  @Override
-  public Map<String, Object> getConstants() {
-    final Map<String, Object> constants = new HashMap<>();
-    constants.put(DURATION_SHORT_KEY, Toast.LENGTH_SHORT);
-    constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
-    return constants;
-  }
+  //暴露给js的方法，该方法返回值必须是void。
+    @ReactMethod
+    public void d(String tag,String msg){
+        Log.d(tag,msg);
+    }
 
 
 }
@@ -82,14 +79,14 @@ public class MainActivity extends ReactActivity {
     }
 ```
 
->JS中使用
+>JS使用
 
 这一步就是我们比较熟悉的了。
 
 ```
 var hello = require('react-native-hellokitty');
 
-console.log(hello.getConstants());//使用java功能类的方法
+hello.d("Log1","我是一只猫");//使用java功能类的方法
 
 
 ```
