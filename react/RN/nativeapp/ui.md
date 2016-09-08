@@ -83,10 +83,26 @@ public class MainActivity extends ReactActivity {
     }
 ```
 
->JS使用
+>在js层新建一个WebView.js文件
 
 ```
-var WebView=require('react-native-RCTWebView');
+'use strict';
+var { requireNativeComponent,PropTypes  } = require('react-native');
+var iface = {
+  name: 'WebView',
+  propTypes: {
+    url: PropTypes.string,
+    html: PropTypes.string,
+  },
+};
+
+module.exports = requireNativeComponent('RCTWebView', iface);
+```
+
+>使用组件
+
+```
+var WebView=require('./WebView');
 render: function() {
     return (
     <View style={styles.container}>
@@ -95,6 +111,9 @@ render: function() {
     );
   },
 ```
+
+倒数第二个步骤感觉略显啰嗦，但按照官方文档走就是这样，抄过来就行。
+
 
 
 
