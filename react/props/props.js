@@ -10,19 +10,19 @@
 *
 *
 * */
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 
-var MyTitle = React.createClass({
-    show:function(){
+class MyTitle extends Component{
+    show(){
         console.log(this.props.title);
         console.log(this.props.contents);
         console.log(this.props.name);
-    },
-    render:function(){
-        return <button onClick={this.show}>click me</button>
     }
-});
+    render(){
+        return (<button onClick={this.show.bind(this)}>click me</button>);
+    }
+}
 
 var data = {title:'this is a title',contents:'this is contents'};
 ReactDOM.render(

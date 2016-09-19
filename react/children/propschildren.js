@@ -6,12 +6,12 @@
     3.我们使用React.Children.map方法，迭代子节点的信息，这个类似jquery的each方法。
     4.注意大小写。
 * */
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 
 //遍历子节点
-var NodeList = React.createClass({
-    render:function(){
+class NodeList extends Component{
+    render(){
         return(
             <ul>
                 {
@@ -25,7 +25,7 @@ var NodeList = React.createClass({
 
         );
     }
-});
+}
 
 
 ReactDOM.render(
