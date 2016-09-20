@@ -13,39 +13,29 @@
 8）使用webpack打包search.js,最后在index.html引用打包后的文件，注意要把dom的id写上。
 *
 * */
-import React from 'react';
+import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
 //small component
-var Search = React.createClass({
-    checkSth:function(){
+class Search extends Component {
+    checkSth(){
         var inputValue = this.refs.myInput.value;
         alert(inputValue);
-    },
-    render:function(){
+    }
+    render(){
         return (
             <div>
-                {this.props.searchType}:
+                请输入内容:
                 <input type="text" ref="myInput"/>
-                <button onClick={this.checkSth}>Search</button>
+                <button onClick={this.checkSth.bind(this)}>获取内容</button>
             </div>
 
 
         );
     }
-});
+}
 
-var Page = React.createClass({
-    render:function(){
-        return(
-            <div>
-                <Search searchType="Title"></Search>
 
-            </div>
-
-        );
-    }
-});
 
 ReactDOM.render(
-    <Page />,document.getElementById('test')
+    <Search />,document.getElementById('test')
 );
