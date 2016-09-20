@@ -8,30 +8,39 @@
 * 5.如果是用props则无法实现，因为我们一旦获取了值，就无法再改变了。
 * 6.分析一个视图，哪些是state，哪些是props很重要。
 * */
-import React from 'react';
+import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
 
-var InputState = React.createClass({
-    getInitialState:function(){
-        //初始状态
-        return {
+class InputState extends Component{
+    //getInitialState:function(){
+    //    //初始状态
+    //    return {
+    //        enable:false
+    //    };
+    //},
+    constructor(props){
+        super(props);//这句不能省，否则会报错
+
+        this.state = {
+
             enable:false
         };
-    },
-    handleClick:function(){
+
+    }
+    handleClick(){
         this.setState({enable:!this.state.enable});
-    },
-    render:function(){
+    }
+    render(){
         return (
             <p>
                 <input type="text" disabled={this.state.enable} />
-                <button onClick={this.handleClick}>change state</button>
+                <button onClick={this.handleClick.bind(this)}>change state</button>
 
 
             </p>
         );
     }
-});
+}
 
 
 ReactDOM.render(
