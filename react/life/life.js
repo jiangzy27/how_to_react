@@ -5,13 +5,11 @@ import ReactDOM from 'react-dom';
 
 class Life extends Component {
 
-     constructor(props){
-        super(props);
-         this.state = {val:'begin'};
-     }
-
     componentWillMount() {
         console.log("渲染前");
+        this.timer = setInterval(function(){
+            console.log('不断打印中.....');
+        },500);
     }
 
     render() {
@@ -28,6 +26,7 @@ class Life extends Component {
     }
      componentWillUnmount(){
          console.log("销毁啦！");
+         clearInterval(this.timer);
      }
 
 }

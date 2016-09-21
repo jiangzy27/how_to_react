@@ -75,19 +75,19 @@
 	var Life = function (_Component) {
 	    _inherits(Life, _Component);
 
-	    function Life(props) {
+	    function Life() {
 	        _classCallCheck(this, Life);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Life).call(this, props));
-
-	        _this.state = { val: 'begin' };
-	        return _this;
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Life).apply(this, arguments));
 	    }
 
 	    _createClass(Life, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
 	            console.log("渲染前");
+	            this.timer = setInterval(function () {
+	                console.log('不断打印中.....');
+	            }, 500);
 	        }
 	    }, {
 	        key: 'render',
@@ -108,6 +108,7 @@
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            console.log("销毁啦！");
+	            clearInterval(this.timer);
 	        }
 	    }]);
 
