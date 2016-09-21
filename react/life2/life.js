@@ -23,7 +23,7 @@ class InputState extends Component{
     componentDidUpdate(){
         console.log("更新后");
     }
-    
+
     render(){
         console.log("渲染中.....");
         return (

@@ -1,37 +1,44 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 console.log($);
-var UserList = React.createClass({
-    //初始化state
-    getInitialState:function(){
-        return {
-            userName:'',
-            passWord:''
+class UserList extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            username:'',
+            age:''
         };
-    },
+
+    }
     //组件加载完毕
-    componentDidMount:function(){
+    componentDidMount(){
         $.getJSON(this.props.url,function(res){
-            if(this.isMounted()){
                 this.setState({
-                    userName:res['name'],
-                    passWord:res['pass']
+                    username:res['name'],
+                    age:res['age']
                 });
-            }
+
         }.bind(this));
-    },
-    render:function(){
+    }
+    render(){
         return (
             <div>
-                {this.state.userName} === {this.state.passWord}
+                {this.state.username} === {this.state.age}
 
             </div>
         );
     }
+}
+//造数据
+// @name：会自动拼接字符串造人名,非常便利！
+// |1-100：表示这个范围的随机整数
+Mock.mock('http://ajax.data.com',{
+    'name':'@name',
+    'age|1-100':100
 });
-
 ReactDOM.render(
-    <UserList url="http://localhost/test.php" />,document.getElementById('test')
+    <UserList url="http://ajax.data.com" />,document.getElementById('app')
 
 );

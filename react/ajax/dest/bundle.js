@@ -54,6 +54,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -68,40 +70,67 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	console.log(_jquery2.default);
-	var UserList = _react2.default.createClass({
-	    displayName: 'UserList',
 
-	    //初始化state
-	    getInitialState: function getInitialState() {
-	        return {
-	            userName: '',
-	            passWord: ''
+	var UserList = function (_Component) {
+	    _inherits(UserList, _Component);
+
+	    function UserList(props) {
+	        _classCallCheck(this, UserList);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserList).call(this, props));
+
+	        _this.state = {
+	            username: '',
+	            age: ''
 	        };
-	    },
-	    //组件加载完毕
-	    componentDidMount: function componentDidMount() {
-	        _jquery2.default.getJSON(this.props.url, function (res) {
-	            if (this.isMounted()) {
-	                this.setState({
-	                    userName: res['name'],
-	                    passWord: res['pass']
-	                });
-	            }
-	        }.bind(this));
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            this.state.userName,
-	            ' === ',
-	            this.state.passWord
-	        );
-	    }
-	});
 
-	_reactDom2.default.render(_react2.default.createElement(UserList, { url: 'http://localhost/test.php' }), document.getElementById('test'));
+	        return _this;
+	    }
+	    //组件加载完毕
+
+
+	    _createClass(UserList, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _jquery2.default.getJSON(this.props.url, function (res) {
+	                this.setState({
+	                    username: res['name'],
+	                    age: res['age']
+	                });
+	            }.bind(this));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.state.username,
+	                ' === ',
+	                this.state.age
+	            );
+	        }
+	    }]);
+
+	    return UserList;
+	}(_react.Component);
+	//造数据
+	// @name：会自动拼接字符串造人名,非常便利！
+	// |1-100：表示这个范围的随机整数
+
+
+	Mock.mock('http://ajax.data.com', {
+	    'name': '@name',
+	    'age|1-100': 100
+	});
+	_reactDom2.default.render(_react2.default.createElement(UserList, { url: 'http://ajax.data.com' }), document.getElementById('app'));
 
 /***/ },
 /* 2 */
