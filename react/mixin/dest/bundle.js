@@ -54,6 +54,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -64,33 +66,117 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//待增强的类
+
+	var MyTest = function (_Component) {
+	    _inherits(MyTest, _Component);
+
+	    function MyTest(props) {
+	        _classCallCheck(this, MyTest);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(MyTest).call(this, props));
+	    }
+
+	    _createClass(MyTest, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'button',
+	                { onClick: this.show.bind(this, this.props) },
+	                'click'
+	            );
+	        }
+	    }]);
+
+	    return MyTest;
+	}(_react.Component);
+
+	//修饰，将类作为参数传入。
+
+
+	var IntervalEnhance = function IntervalEnhance(myComponent) {
+	    //声明一个内部类。
+	    // 注意，这个内部类不能有render方法，否则会将原类中的render覆盖。
+
+	    var ES6_Mixin = function (_myComponent) {
+	        _inherits(ES6_Mixin, _myComponent);
+
+	        function ES6_Mixin() {
+	            _classCallCheck(this, ES6_Mixin);
+
+	            return _possibleConstructorReturn(this, Object.getPrototypeOf(ES6_Mixin).apply(this, arguments));
+	        }
+
+	        _createClass(ES6_Mixin, [{
+	            key: 'componentWillMount',
+	            value: function componentWillMount() {
+	                console.log("渲染前");
+	                this.timer = setInterval(function () {
+	                    console.log('不断打印中.....');
+	                }, 500);
+	            }
+	        }, {
+	            key: 'componentWillUnmount',
+	            value: function componentWillUnmount() {
+	                console.log("销毁啦！");
+	                clearInterval(this.timer);
+	            }
+	        }, {
+	            key: 'show',
+	            value: function show(obj) {
+	                console.log(obj);
+	            }
+	        }]);
+
+	        return ES6_Mixin;
+	    }(myComponent);
+	    //修饰后返回
+
+
+	    return ES6_Mixin;
+	};
+
+	var EnhancedTest = IntervalEnhance(MyTest);
+	_reactDom2.default.render(_react2.default.createElement(EnhancedTest, { myname: "zhangsan" }), document.getElementById('app'));
+
+	//10s后销毁
+	setTimeout(function () {
+	    _reactDom2.default.unmountComponentAtNode(document.getElementById("app"));
+	}, 10000);
+	/*
 	//声明一个mixin,注意这是一个对象！
 	var helloMixin = {
-	    componentDidMount: function componentDidMount() {
+	    componentDidMount: function () {
 	        console.log('from mixin');
 	    },
-	    show: function show() {
+	    show:function(){
 	        alert('haha');
 	    }
 	};
 
-	var MyTitle = _react2.default.createClass({
-	    displayName: 'MyTitle',
-
-	    mixins: [helloMixin], //打入
-	    componentDidMount: function componentDidMount() {
+	var MyTitle = React.createClass({
+	    mixins:[helloMixin],//打入
+	    //如果设置相同的 Prop 和 State则会报错。
+	    //如果mixin有周期函数，则先加载，如果多个mixin都有周期函数，按照从左到右的顺序加载。
+	    componentDidMount: function () {
 	        console.log('from MyTitle');
 	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'button',
-	            { onClick: this.show },
-	            'click me'
-	        );
+	    render:function(){
+	        return <button onClick={this.show}>click me</button>
 	    }
 	});
 
-	_reactDom2.default.render(_react2.default.createElement(MyTitle, null), document.getElementById('app'));
+	ReactDOM.render(
+	    <MyTitle />,
+	    document.getElementById('app')
+
+	);*/
 
 /***/ },
 /* 2 */
