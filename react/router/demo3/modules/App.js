@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{Component} from 'react'
 import {Link} from 'react-router'
-export default React.createClass({
-    contextTypes: {
-        router: React.PropTypes.object
-    },
+class Repos extends Component{
+    constructor(props){
+        super(props);
+        Repos.contextTypes = { router: React.PropTypes.object};
+    }
+
 
     handleRedirect(event){
         event.preventDefault();
@@ -13,7 +15,8 @@ export default React.createClass({
         const path = `/repos/${userName}/${email}`;
         //跳转
         this.context.router.push(path)
-    },
+    }
+
     render(){
         return (
             <div>
@@ -23,8 +26,9 @@ export default React.createClass({
                     <li><Link to="/repos/jack/qqcom">Repo params</Link></li>
 
                 </ul>
-                <button onClick={this.handleRedirect}>跳转</button>
+                <button onClick={this.handleRedirect.bind(this)}>跳转</button>
             </div>
         );
     }
-});
+}
+export default Repos;
