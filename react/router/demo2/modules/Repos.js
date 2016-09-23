@@ -1,6 +1,4 @@
 import React,{ Component } from 'react';
-import {Link} from 'react-router';
-
 class Repos extends Component{
 
     render(){
