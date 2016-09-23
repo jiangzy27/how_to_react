@@ -26725,19 +26725,16 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Repos = function (_Component) {
-	    _inherits(Repos, _Component);
+	var App = function (_Component) {
+	    _inherits(App, _Component);
 
-	    function Repos(props) {
-	        _classCallCheck(this, Repos);
+	    function App() {
+	        _classCallCheck(this, App);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Repos).call(this, props));
-
-	        Repos.contextTypes = { router: _react2.default.PropTypes.object };
-	        return _this;
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	    }
 
-	    _createClass(Repos, [{
+	    _createClass(App, [{
 	        key: 'handleRedirect',
 	        value: function handleRedirect(event) {
 	            event.preventDefault();
@@ -26748,6 +26745,8 @@
 	            //跳转
 	            this.context.router.push(path);
 	        }
+	        //ES7阶段草案，静态属性
+
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -26781,10 +26780,11 @@
 	        }
 	    }]);
 
-	    return Repos;
+	    return App;
 	}(_react.Component);
 
-	exports.default = Repos;
+	App.contextTypes = { router: _react2.default.PropTypes.object };
+	exports.default = App;
 
 /***/ },
 /* 236 */

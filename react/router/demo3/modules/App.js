@@ -1,11 +1,8 @@
 import React,{Component} from 'react'
 import {Link} from 'react-router'
 class App extends Component{
-    constructor(props){
-        super(props);
-        App.contextTypes = { router: React.PropTypes.object};
-    }
-
+    //ES7阶段草案，静态属性
+    static contextTypes = { router: React.PropTypes.object};
 
     handleRedirect(event){
         event.preventDefault();
