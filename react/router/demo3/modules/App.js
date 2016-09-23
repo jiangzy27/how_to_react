@@ -1,9 +1,9 @@
 import React,{Component} from 'react'
 import {Link} from 'react-router'
-class Repos extends Component{
+class App extends Component{
     constructor(props){
         super(props);
-        Repos.contextTypes = { router: React.PropTypes.object};
+        App.contextTypes = { router: React.PropTypes.object};
     }
 
 
@@ -31,4 +31,4 @@ class Repos extends Component{
         );
     }
 }
-export default Repos;
+export default App;
