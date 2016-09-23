@@ -101,8 +101,8 @@
 	        value: function componentDidMount() {
 	            _jquery2.default.getJSON(this.props.url, function (res) {
 	                this.setState({
-	                    username: res['name'],
-	                    age: res['age']
+	                    username: res['myName'],
+	                    age: res['myAge']
 	                });
 	            }.bind(this));
 	        }
@@ -127,8 +127,8 @@
 
 
 	Mock.mock('http://ajax.data.com', {
-	    'name': '@name',
-	    'age|1-100': 100
+	    'myName': '@name',
+	    'myAge|1-100': 100
 	});
 	_reactDom2.default.render(_react2.default.createElement(UserList, { url: 'http://ajax.data.com' }), document.getElementById('app'));
 

@@ -16,8 +16,8 @@ class UserList extends Component{
     componentDidMount(){
         $.getJSON(this.props.url,function(res){
                 this.setState({
-                    username:res['name'],
-                    age:res['age']
+                    username:res['myName'],
+                    age:res['myAge']
                 });
 
         }.bind(this));
@@ -35,8 +35,8 @@ class UserList extends Component{
 // @name：会自动拼接字符串造人名,非常便利！
 // |1-100：表示这个范围的随机整数
 Mock.mock('http://ajax.data.com',{
-    'name':'@name',
-    'age|1-100':100
+    'myName':'@name',
+    'myAge|1-100':100
 });
 ReactDOM.render(
     <UserList url="http://ajax.data.com" />,document.getElementById('app')
