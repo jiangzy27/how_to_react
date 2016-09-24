@@ -1,7 +1,8 @@
 //引入包
-import React from 'react';
+import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
 import Reflux from 'reflux';
+import ReactMixin from 'react-mixin';
 import $ from 'jquery';
 //创建多个actions的方法
 var  TodoActions = Reflux.createActions(['addItem','deleteItem']);
@@ -31,6 +32,33 @@ var TodoStore = Reflux.createStore({
     }
 });
 //创造一个view
+class TodoComponent extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {list:[]};
+
+    }
+    componentDidMount(){
+        this.listenTo(TodoStore,this._onChange);
+    }
+    //监听到store发生变化后触发
+    _onChange(){
+        this.setState({list:TodoStore.items});
+    }
+    render(){
+    return (
+        <div>
+                {this.state.list.map(function(item,key){
+                    return <p key={key}>{item}</p>
+                })}
+
+        </div>
+
+        );
+    }
+}
+/*
 var TodoComponent = React.createClass({
 
     //监听store
@@ -55,6 +83,9 @@ var TodoComponent = React.createClass({
         );
     }
 });
+*/
+ReactMixin.onClass(TodoComponent, Reflux.ListenerMixin);
+
 ReactDOM.render(<TodoComponent />,document.getElementById('app'));
 //启动,单项数据流动
 TodoActions.addItem('newperson');
