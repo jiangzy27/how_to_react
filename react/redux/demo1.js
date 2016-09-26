@@ -2,6 +2,7 @@ import {createStore} from 'redux';
 
 //传入action，改变旧状态，返回新状态
 var store = createStore(function(oldState,action){
+    var defaultStatus = "无所事事";
    if(action.type=="A"){
        return {status:"吃饭"};
    }
@@ -11,7 +12,7 @@ var store = createStore(function(oldState,action){
    else if(action.type="C"){
        return {status:"工作"}
    }else{
-       return {status:"无所事事"};
+       return {status:defaultStatus};
    }
 });
 //只有在state发生变化了之后，才会触发。
