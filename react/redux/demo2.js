@@ -30,10 +30,11 @@ var store = createStore(reducer);
 store.subscribe(function(){
     console.log(store.getState());
 });
-//分发请求
+//action
 var action1 = { type: 'A' };
 var action2 = { type: 'B' };
 var action3 = { type: 'C' };
+//分发请求
 store.dispatch(action1);
 store.dispatch(action2);
 store.dispatch(action3);
