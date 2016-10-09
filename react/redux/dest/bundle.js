@@ -22848,7 +22848,7 @@
 	        type: "ok" //表示已完成
 	    };
 	}
-	//容器型组件
+	//容器型组件App
 
 	var App = function (_Component) {
 	    _inherits(App, _Component);
@@ -22862,10 +22862,14 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
+	            //connect后，会得到这些东西
+
 	            var _props = this.props;
 	            var dispatch = _props.dispatch;
 	            var completed = _props.completed;
 
+	            console.log("旧状态：" + completed);
+	            //点击后，触发store，改变store管理的状态。
 	            return _react2.default.createElement(_Todo2.default, { onTodoClick: function onTodoClick() {
 	                    return dispatch(completeTodo());
 	                }, completed: completed });
@@ -22875,10 +22879,13 @@
 	    return App;
 	}(_react.Component);
 
+	//配置state到props的映射
+
+
 	function mapStateToProps(state) {
 	    return { completed: state.completed };
 	}
-
+	//粘合容器组件，让容器组件的props拥有dispath和completed属性。
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
 /***/ },
@@ -22905,6 +22912,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//展示型组件
+
 	var Todo = function (_Component) {
 	    _inherits(Todo, _Component);
 
@@ -22921,7 +22930,6 @@
 	            return _react2.default.createElement(
 	                'li',
 	                { onClick: this.props.onTodoClick,
-
 	                    style: { textDecoration: this.props.completed ? 'line-through' : 'none' } },
 	                '测试数据'
 	            );
