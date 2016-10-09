@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>redux demo</title>
+    <script src="//cdn.bootcss.com/redux/3.5.2/redux.min.js"></script>
+</head>
+<body>
+<script>
+    /** Action Creators */
+    function inc() {
+        return { type: 'INCREMENT' };
+    }
+    function dec() {
+        return { type: 'DECREMENT' };
+    }
+
+    function reducer(state, action) {
+        state = state || { counter: 0 };
+
+        switch (action.type) {
+            case 'INCREMENT':
+                return { counter: state.counter + 1 };
+            case 'DECREMENT':
+                return { counter: state.counter - 1 };
+            default:
+                return state;
+        }
+    }
+
+    function printStateMiddleware(middlewareAPI) {
+        return function (dispatch) {
+            return function (action) {
+                console.log('dispatch 前：', middlewareAPI.getState());
+                var returnValue = dispatch(action);
+                console.log('dispatch 后：', middlewareAPI.getState(), '\n');
+                return returnValue;
+            };
+        };
+    }
+
+   // var enhancedCreateStore = Redux.applyMiddleware(printStateMiddleware)(Redux.createStore);
+   // var store = enhancedCreateStore(reducer);
+    var store = Redux.createStore(
+            reducer,
+            Redux.applyMiddleware(printStateMiddleware)
+    );
+    store.dispatch(inc());
+    store.dispatch(inc());
+    store.dispatch(dec());
+</script>
+</body>
+</html>
