@@ -78,6 +78,17 @@
 	//自定义的时间格式
 	var format = 'YYYY/MM/DD';
 	_reactDom2.default.render(_react2.default.createElement(_antd.DatePicker, { size: 'small', onChange: handleDate, format: format }), document.getElementById('app2'));
+	//指定不可选择的日期
+	var disabledDate = function disabledDate(current) {
+	    //今天之后的时间是不可选的
+	    return current && current.valueOf() > Date.now();
+	};
+	_reactDom2.default.render(_react2.default.createElement(_antd.DatePicker, { disabledDate: disabledDate }), document.getElementById('app3'));
+
+	//选择起始与结束日期
+	var RangePicker = _antd.DatePicker.RangePicker;
+
+	_reactDom2.default.render(_react2.default.createElement(RangePicker, null), document.getElementById('app4'));
 
 /***/ },
 /* 2 */
