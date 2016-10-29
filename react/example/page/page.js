@@ -59,9 +59,15 @@ class Container extends Component{
 class ListItem extends Component {
 
     render(){
+        var stylelist = {
+            borderBottom:'1px solid #ccc',
+            height:'50px',
+            textAlign:'center',
+            lineHeight:'50px'
+        };
         var arr = [];
         for(let i=0;i<this.props.data.length;i++){
-            arr.push(<li key={this.props.data[i]['id']}>{this.props.data[i]['name']}</li>);
+            arr.push(<li style={stylelist} key={this.props.data[i]['id']}>{this.props.data[i]['name']}</li>);
         }
         return (
             <ul>

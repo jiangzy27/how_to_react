@@ -118,8 +118,7 @@
 	                url: url,
 	                dataType: 'json',
 	                success: function (data) {
-	                    console.log(data);
-	                    console.log(data['total']);
+
 	                    this.setState({
 	                        current: page,
 	                        total: data['total'],
@@ -161,11 +160,17 @@
 	    _createClass(ListItem, [{
 	        key: 'render',
 	        value: function render() {
+	            var stylelist = {
+	                borderBottom: '1px solid #ccc',
+	                height: '50px',
+	                textAlign: 'center',
+	                lineHeight: '50px'
+	            };
 	            var arr = [];
 	            for (var i = 0; i < this.props.data.length; i++) {
 	                arr.push(_react2.default.createElement(
 	                    'li',
-	                    { key: this.props.data[i]['id'] },
+	                    { style: stylelist, key: this.props.data[i]['id'] },
 	                    this.props.data[i]['name']
 	                ));
 	            }
