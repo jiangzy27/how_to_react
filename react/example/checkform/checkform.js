@@ -6,10 +6,10 @@ const FormItem = Form.Item;
 Mock.mock('http://ajax.data.com',{
     'myName':'樱木花道'
 });
-const NormalLoginForm = Form.create()(React.createClass({
+class MyForm extends Component{
   handleSubmit(e) {
     e.preventDefault();
-
+    console.log(this.props);
     this.props.form.validateFields((err, values) => {
 
       if (err) {
@@ -17,14 +17,14 @@ const NormalLoginForm = Form.create()(React.createClass({
       }
       console.log('获取的值：', values);
     });
-  },
+  }
   checkBirthday(rule, value, callback){
     if (value && value.valueOf() >= Date.now()) {
       callback(new Error("你不可能生于未来吧"));
     } else {
       callback();
     }
-  },
+  }
   ajaxCheck(rules,value,callback){
         $.ajax({
             url:'http://ajax.data.com',
@@ -37,11 +37,11 @@ const NormalLoginForm = Form.create()(React.createClass({
                 }
             }
         });
-  },
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit.bind(this)}>
         <FormItem>
           {getFieldDecorator('userName', {
             rules:
@@ -109,9 +109,9 @@ const NormalLoginForm = Form.create()(React.createClass({
         </FormItem>
       </Form>
     );
-  },
-}));
-
-ReactDOM.render(<NormalLoginForm />, document.getElementById('app'));
+  }
+};
+const NormalForm =  Form.create()(MyForm);
+ReactDOM.render(<NormalForm />, document.getElementById('app'));
 
     

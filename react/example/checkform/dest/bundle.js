@@ -54,6 +54,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -70,138 +72,165 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var FormItem = _antd.Form.Item;
 	Mock.mock('http://ajax.data.com', {
 	  'myName': '樱木花道'
 	});
-	var NormalLoginForm = _antd.Form.create()(_react2.default.createClass({
-	  displayName: 'NormalLoginForm',
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
 
-	    this.props.form.validateFields(function (err, values) {
+	var MyForm = function (_Component) {
+	  _inherits(MyForm, _Component);
 
-	      if (err) {
-	        return;
-	      }
-	      console.log('获取的值：', values);
-	    });
-	  },
-	  checkBirthday: function checkBirthday(rule, value, callback) {
-	    if (value && value.valueOf() >= Date.now()) {
-	      callback(new Error("你不可能生于未来吧"));
-	    } else {
-	      callback();
-	    }
-	  },
-	  ajaxCheck: function ajaxCheck(rules, value, callback) {
-	    _jquery2.default.ajax({
-	      url: 'http://ajax.data.com',
-	      dataType: 'json',
-	      success: function success(data) {
-	        if (value == data['myName']) {
-	          callback(new Error("樱木花道已注册"));
-	        } else {
-	          callback();
-	        }
-	      }
-	    });
-	  },
-	  render: function render() {
-	    var getFieldDecorator = this.props.form.getFieldDecorator;
+	  function MyForm() {
+	    _classCallCheck(this, MyForm);
 
-	    return _react2.default.createElement(
-	      _antd.Form,
-	      { onSubmit: this.handleSubmit },
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        getFieldDecorator('userName', {
-	          rules: [{ required: true, type: 'string', message: '用户名不能为空' }, { min: 3, type: 'string', message: '用户名不能少于3位' }, { max: 6, type: 'string', message: '用户名不能多于6位' }, { pattern: /^[\u2E80-\u9FFF]+$/, type: 'string', message: '用户名必须为汉字' }, { validator: this.ajaxCheck }]
-	        })(_react2.default.createElement(_antd.Input, { placeholder: '\u8BF7\u8F93\u5165\u7528\u6237\u540D' }))
-	      ),
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        getFieldDecorator('selectName', {
-	          rules: [{ required: true, type: 'string', message: '请选择国家' }]
-	        })(_react2.default.createElement(
-	          _antd.Select,
-	          null,
-	          _react2.default.createElement(
-	            _antd.Select.Option,
-	            { value: '' },
-	            '\u8BF7\u9009\u62E9'
-	          ),
-	          _react2.default.createElement(
-	            _antd.Select.Option,
-	            { value: 'USA' },
-	            '\u7F8E\u56FD'
-	          ),
-	          _react2.default.createElement(
-	            _antd.Select.Option,
-	            { value: 'Korea', disabled: true },
-	            '\u97E9\u56FD'
-	          ),
-	          _react2.default.createElement(
-	            _antd.Select.Option,
-	            { value: 'Japan' },
-	            '\u65E5\u672C'
-	          )
-	        ))
-	      ),
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        getFieldDecorator('radioChoise', {
-	          rules: [{ required: true, type: 'string', message: '请选择性别' }]
-	        })(_react2.default.createElement(
-	          _antd.Radio.Group,
-	          null,
-	          _react2.default.createElement(
-	            _antd.Radio,
-	            { value: 'male' },
-	            '\u7537'
-	          ),
-	          _react2.default.createElement(
-	            _antd.Radio,
-	            { value: 'female' },
-	            '\u5973'
-	          )
-	        ))
-	      ),
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        getFieldDecorator('interest')(_react2.default.createElement(_antd.Checkbox.Group, { options: ['读书', '跑步', '网游'] }))
-	      ),
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        getFieldDecorator('birthday', {
-	          rules: [{
-	            required: true,
-	            type: 'object',
-	            message: '生日不可为空'
-	          }, {
-	            validator: this.checkBirthday
-	          }]
-	        })(_react2.default.createElement(_antd.DatePicker, null))
-	      ),
-	      _react2.default.createElement(
-	        FormItem,
-	        null,
-	        _react2.default.createElement(
-	          _antd.Button,
-	          { type: 'primary', htmlType: 'submit' },
-	          '\u63D0\u4EA4'
-	        )
-	      )
-	    );
+	    return _possibleConstructorReturn(this, (MyForm.__proto__ || Object.getPrototypeOf(MyForm)).apply(this, arguments));
 	  }
-	}));
 
-	_reactDom2.default.render(_react2.default.createElement(NormalLoginForm, null), document.getElementById('app'));
+	  _createClass(MyForm, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      console.log(this.props);
+	      this.props.form.validateFields(function (err, values) {
+
+	        if (err) {
+	          return;
+	        }
+	        console.log('获取的值：', values);
+	      });
+	    }
+	  }, {
+	    key: 'checkBirthday',
+	    value: function checkBirthday(rule, value, callback) {
+	      if (value && value.valueOf() >= Date.now()) {
+	        callback(new Error("你不可能生于未来吧"));
+	      } else {
+	        callback();
+	      }
+	    }
+	  }, {
+	    key: 'ajaxCheck',
+	    value: function ajaxCheck(rules, value, callback) {
+	      _jquery2.default.ajax({
+	        url: 'http://ajax.data.com',
+	        dataType: 'json',
+	        success: function success(data) {
+	          if (value == data['myName']) {
+	            callback(new Error("樱木花道已注册"));
+	          } else {
+	            callback();
+	          }
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var getFieldDecorator = this.props.form.getFieldDecorator;
+
+	      return _react2.default.createElement(
+	        _antd.Form,
+	        { onSubmit: this.handleSubmit.bind(this) },
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          getFieldDecorator('userName', {
+	            rules: [{ required: true, type: 'string', message: '用户名不能为空' }, { min: 3, type: 'string', message: '用户名不能少于3位' }, { max: 6, type: 'string', message: '用户名不能多于6位' }, { pattern: /^[\u2E80-\u9FFF]+$/, type: 'string', message: '用户名必须为汉字' }, { validator: this.ajaxCheck }]
+	          })(_react2.default.createElement(_antd.Input, { placeholder: '\u8BF7\u8F93\u5165\u7528\u6237\u540D' }))
+	        ),
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          getFieldDecorator('selectName', {
+	            rules: [{ required: true, type: 'string', message: '请选择国家' }]
+	          })(_react2.default.createElement(
+	            _antd.Select,
+	            null,
+	            _react2.default.createElement(
+	              _antd.Select.Option,
+	              { value: '' },
+	              '\u8BF7\u9009\u62E9'
+	            ),
+	            _react2.default.createElement(
+	              _antd.Select.Option,
+	              { value: 'USA' },
+	              '\u7F8E\u56FD'
+	            ),
+	            _react2.default.createElement(
+	              _antd.Select.Option,
+	              { value: 'Korea', disabled: true },
+	              '\u97E9\u56FD'
+	            ),
+	            _react2.default.createElement(
+	              _antd.Select.Option,
+	              { value: 'Japan' },
+	              '\u65E5\u672C'
+	            )
+	          ))
+	        ),
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          getFieldDecorator('radioChoise', {
+	            rules: [{ required: true, type: 'string', message: '请选择性别' }]
+	          })(_react2.default.createElement(
+	            _antd.Radio.Group,
+	            null,
+	            _react2.default.createElement(
+	              _antd.Radio,
+	              { value: 'male' },
+	              '\u7537'
+	            ),
+	            _react2.default.createElement(
+	              _antd.Radio,
+	              { value: 'female' },
+	              '\u5973'
+	            )
+	          ))
+	        ),
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          getFieldDecorator('interest')(_react2.default.createElement(_antd.Checkbox.Group, { options: ['读书', '跑步', '网游'] }))
+	        ),
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          getFieldDecorator('birthday', {
+	            rules: [{
+	              required: true,
+	              type: 'object',
+	              message: '生日不可为空'
+	            }, {
+	              validator: this.checkBirthday
+	            }]
+	          })(_react2.default.createElement(_antd.DatePicker, null))
+	        ),
+	        _react2.default.createElement(
+	          FormItem,
+	          null,
+	          _react2.default.createElement(
+	            _antd.Button,
+	            { type: 'primary', htmlType: 'submit' },
+	            '\u63D0\u4EA4'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return MyForm;
+	}(_react.Component);
+
+	;
+	var NormalForm = _antd.Form.create()(MyForm);
+	_reactDom2.default.render(_react2.default.createElement(NormalForm, null), document.getElementById('app'));
 
 /***/ },
 /* 2 */
