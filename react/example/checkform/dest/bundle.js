@@ -54,8 +54,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -68,51 +66,79 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var FormItem = _antd.Form.Item;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	var NormalLoginForm = _antd.Form.create()(_react2.default.createClass({
+	  displayName: 'NormalLoginForm',
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	    this.props.form.validateFields(function (err, values) {
 
-	var Star = function (_Component) {
-	    _inherits(Star, _Component);
+	      if (err) {
+	        return;
+	      }
 
-	    function Star(props) {
-	        _classCallCheck(this, Star);
+	      console.log('获取的值：', values);
+	    });
+	  },
+	  render: function render() {
+	    var getFieldDecorator = this.props.form.getFieldDecorator;
 
-	        var _this = _possibleConstructorReturn(this, (Star.__proto__ || Object.getPrototypeOf(Star)).call(this, props));
+	    return _react2.default.createElement(
+	      _antd.Form,
+	      { onSubmit: this.handleSubmit },
+	      _react2.default.createElement(
+	        FormItem,
+	        null,
+	        getFieldDecorator('userName', {
+	          rules: [{ required: true, message: '用户名不能为空!' }]
+	        })(_react2.default.createElement(_antd.Input, { placeholder: '\u8BF7\u8F93\u5165\u7528\u6237\u540D' }))
+	      ),
+	      _react2.default.createElement(
+	        FormItem,
+	        null,
+	        getFieldDecorator('selectName', {
+	          rules: [{ required: true, message: 'select必选一项' }]
+	        })(_react2.default.createElement(
+	          _antd.Select,
+	          null,
+	          _react2.default.createElement(
+	            _antd.Select.Option,
+	            { value: '' },
+	            '\u8BF7\u9009\u62E9'
+	          ),
+	          _react2.default.createElement(
+	            _antd.Select.Option,
+	            { value: '2' },
+	            'JACK'
+	          ),
+	          _react2.default.createElement(
+	            _antd.Select.Option,
+	            { value: '0', disabled: true },
+	            '\u4E0D\u80FD\u9009'
+	          ),
+	          _react2.default.createElement(
+	            _antd.Select.Option,
+	            { value: '3' },
+	            'TOM'
+	          )
+	        ))
+	      ),
+	      _react2.default.createElement(
+	        FormItem,
+	        null,
+	        _react2.default.createElement(
+	          _antd.Button,
+	          { type: 'primary', htmlType: 'submit' },
+	          '\u767B\u5F55'
+	        )
+	      )
+	    );
+	  }
+	}));
 
-	        _this.state = {
-	            value: 3
-	        };
-	        return _this;
-	    }
-	    //选择星级
-
-
-	    _createClass(Star, [{
-	        key: 'handleChange',
-	        value: function handleChange(num) {
-	            console.log(num);
-	            this.setState({
-	                value: num
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_antd.Rate, { allowHalf: true, onChange: this.handleChange.bind(this), value: this.state.value })
-	            );
-	        }
-	    }]);
-
-	    return Star;
-	}(_react.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(Star, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(NormalLoginForm, null), document.getElementById('app'));
 
 /***/ },
 /* 2 */
