@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>文件分解</title>
+</head>
+<body>
+<input type="file" id="uploadImg" onchange="uploadFile()" multiple/><br/>
+<button onclick="sub()">提交</button>
+</body>
+</html>
+<script>
+    var file_arr = [];
+    function uploadFile(){
+        var file = document.querySelector('#uploadImg').files[0];
+        file_arr.push(file);
+        console.log(file_arr);
+    }
+    function sub(){
+        var form = new FormData();
+        for(var i=0;i<file_arr.length;i++){
+            form.append('imgfile',file_arr[i]);
+        }
+        form.forEach(function(ele){
+            console.log(ele);
+        });
+    }
+</script>

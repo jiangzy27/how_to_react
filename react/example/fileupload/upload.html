@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>图片上传功能</title>
+</head>
+<body>
+
+<input type="file" id="uploadImg" onchange="uploadFile()" multiple/><br/>
+<div>进度条: <span id="progress" style="color:red;"></span></div>
+<button onclick="sub()">提交</button>
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest();
+    var file_arr = [];
+    function uploadFile(){
+        var file = document.querySelector('#uploadImg').files[0];
+        file_arr.push(file);
+        console.log(file_arr);
+    }
+    function sub(){
+        var form = new FormData();
+        for(var i=0;i<file_arr.length;i++){
+            form.append('imgfile',file_arr[i]);
+        }
+        console.log(xhr);
+        xhr.onreadystatechange = callback;//状态回调
+        xhr.onprogress = callback_progress;//状态回调
+        xhr.open('POST','./fileupload.js');
+        xhr.send(form);
+
+    }
+    function callback(){
+        console.log(xhr.readyState);
+        if(xhr.readyState == 4){
+            console.log(xhr.status);
+            if(xhr.status ==200){
+
+                console.log(xhr.responseText);//http状态码对应的文本
+            }
+
+        }
+    }
+    function callback_progress(e){
+        console.log(e.loaded);
+        console.log(e.total);
+        if(e.lengthComputable){
+            var prog = document.querySelector('#progress');
+            prog.innerHTML = Math.round(100*(e.loaded)/e.total)+" % complete!";
+        }
+
+    }
+</script>
