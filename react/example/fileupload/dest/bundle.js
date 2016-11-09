@@ -54,6 +54,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -96,7 +98,7 @@
 	    null,
 	    _react2.default.createElement(
 	        _antd.Upload,
-	        data_props,
+	        _extends({}, data_props, { multiple: true }),
 	        _react2.default.createElement(
 	            _antd.Button,
 	            { type: 'ghost' },

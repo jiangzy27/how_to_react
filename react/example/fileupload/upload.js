@@ -27,7 +27,7 @@ const data_props = {
 
 ReactDOM.render(
     <div>
-        <Upload {...data_props}>
+        <Upload {...data_props} multiple>
             <Button type="ghost">
                 <Icon type="upload" />点击上传
             </Button>
